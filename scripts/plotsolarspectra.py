@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pdb
+import os
+
+dirname = os.path.dirname(__file__)
 
 #integrated fluxes from N Vingoles
 fi_pp = 5.98e10
@@ -14,13 +17,13 @@ fi_f = 2.05e6
 fi_hep = 5.28e3
 
 #read data for the nitrogen-13 neutrinos. Flux in cm^-2 s^-1 at Earth's surface, E in MeV
-n13 = np.genfromtxt("n13.dat", delimiter="  ") # sns.ias.edu
-o15 = np.genfromtxt("o15.dat", delimiter="  ") # ''
-f17 = np.genfromtxt("f17.dat", delimiter="  ") # ''
-hep = np.genfromtxt("hep.dat", delimiter="  ") # ''
-b8 = np.genfromtxt("b8.dat", usecols=[0, 1]) # ''
-pp_raw = np.genfromtxt("pp.dat") # ''
-be7_raw = np.genfromtxt("be7.dat") # ''
+n13 = np.genfromtxt(dirname + "/../data/n13.dat", delimiter="  ") # sns.ias.edu
+o15 = np.genfromtxt(dirname + "/../data/o15.dat", delimiter="  ") # ''
+f17 = np.genfromtxt(dirname + "/../data/f17.dat", delimiter="  ") # ''
+hep = np.genfromtxt(dirname + "/../data/hep.dat", delimiter="  ") # ''
+b8 = np.genfromtxt(dirname + "/../data/b8.dat", usecols=[0, 1]) # ''
+pp_raw = np.genfromtxt(dirname + "/../data/pp.dat") # ''
+be7_raw = np.genfromtxt(dirname + "/../data/be7.dat") # ''
 En = n13[:, 0]
 fn = n13[:, 1]*fi_n
 Eo = o15[:, 0]
@@ -57,9 +60,9 @@ fn = np.concatenate((fn,np.linspace(0,0,300)))
 #group into energy bins
 def IQR(dist):
     return np.percentile(dist,75) - np.percentile(dist,25)
-#n_bins = int(np.ceil((max(En[-1], Eo[-1], Ef[-1])-min(En[0], Eo[0], Ef[0]))/(2*IQR(Eo)*len(Eo)**(-1/3)))) #Freedman-Diaconis
+n_bins = int(np.ceil((max(En[-1], Eo[-1], Ef[-1])-min(En[0], Eo[0], Ef[0]))/(2*IQR(Eo)*len(Eo)**(-1/3)))) #Freedman-Diaconis
 #n_bins = int(round(len(Eo)**(1/2)))
-n_bins = 240
+#n_bins = 240
 #pdb.set_trace()
 Ebin = np.linspace(min(En[0], Eo[0], Ef[0]), max(En[-1], Eo[-1], Ef[-1]), n_bins)
 fbinned = []
