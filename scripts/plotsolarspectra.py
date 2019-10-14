@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pdb
 import os
 
-dirname = os.path.dirname(__file__)
+dirname = os.path.dirname(os.path.realpath(__file__))
 
 #integrated fluxes from N Vingoles
 fi_pp = 5.98e10
