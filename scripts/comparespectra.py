@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pdb
 import os
+from scipy import integrate
 
 dirname = os.path.dirname(os.path.realpath(__file__))
 
@@ -17,11 +18,11 @@ o15 = np.genfromtxt(dirname + "/../data/o15.dat", delimiter="  ") # ''
 f17 = np.genfromtxt(dirname + "/../data/f17.dat", delimiter="  ") # ''
 comspec = np.genfromtxt(dirname+"/../data/CNO_old.ratdb", delimiter=",")
 En = n13[:, 0]
-fn = n13[:, 1]#*fi_n
+fn = n13[:, 1] * fi_n
 Eo = o15[:, 0]
-fo = o15[:, 1]#*fi_o
+fo = o15[:, 1] * fi_o
 Ef = f17[:, 0]
-ff = f17[:, 1]#*fi_f
+ff = f17[:, 1] * fi_f
 
 Ec = comspec[0,:]
 fc = comspec[1,:]
@@ -56,13 +57,18 @@ for i in range(n_bins - 1):
 Enbinned = Ebin - ((max(En[-1], Eo[-1], Ef[-1]) - min(En[0], Eo[0], Ef[0])) / n_bins)
 Enbinned = Enbinned[1:]
 
+fbinned = fbinned/integrate.simps(fbinned,Enbinned)
+
+
+
+
 fig,ax = plt.subplots()
 ax.set_xscale('log')
 ax.set_yscale('log')
 #ax.set_xlim(0.1, 21)
 #ax.set_ylim(10, 10e12)
 ax.plot(Enbinned, np.array(fbinned), 'kx', label='New')
-ax.plot(Ec,fc,'ro',label='Summer')
+ax.plot(Ec,fc,'r+',label='Summer')
 
 ax.set_xlabel("Energy (MeV)")
 ax.set_ylabel("Flux (cm^-2 s^-1)")
