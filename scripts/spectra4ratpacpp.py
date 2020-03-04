@@ -34,18 +34,19 @@ n_bins = len(Epp)
 #write the combined spectrum to a file in the required format for ratpac
 with open(dirname + "/../data/pp.ratdb",'w') as outfile:
     outfile.write("{\n")
-    outfile.write('name: "pp"\n')
+    outfile.write('name: "SPECTRUM",\n')
+    outfile.write('index: "pp",\n')
     outfile.write("valid_begin: [0,0],\n")
     outfile.write("valid_Eppd:[0,0],\n")
-    outfile.write("emin: %.5g\n" % Epp[0])
-    outfile.write("emax: %.5g\n" % Epp[-1])
+    outfile.write("emin: %f\n" % Epp[0])
+    outfile.write("emax: %f\n" % Epp[-1])
     outfile.write("spec_e: [")
     for i in range(n_bins-1):
-        if i != (n_bins-2): outfile.write("%.5g," % Epp[i])
-        else: outfile.write("%.5g],\n" % Epp[i])
-    outfile.write("spec_flux: [")
+        if i != (n_bins-2): outfile.write("%f," % Epp[i])
+        else: outfile.write("%f],\n" % Epp[i])
+    outfile.write("spec_mag: [")
     for i in range(n_bins-1):
-        if i != (n_bins-2): outfile.write("%.5g," % fpp[i])
-        else: outfile.write("%.5g],\n" % fpp[i])
+        if i != (n_bins-2): outfile.write("%f," % fpp[i])
+        else: outfile.write("%f],\n" % fpp[i])
     outfile.write("}")
 

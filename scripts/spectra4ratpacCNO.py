@@ -94,25 +94,26 @@ def CNOPlot(CNOfunc,En,fn,Eo,fo,Ef,ff,n_bins):
     plt.savefig(dirname + "/../plots/CNOSolarNeutrinoSpectrum.pdf")
     plt.show()
 
-CNOPlot(CNOfunc,En,fn,Eo,fo,Ef,ff,n_bins)
+#CNOPlot(CNOfunc,En,fn,Eo,fo,Ef,ff,n_bins)
 
 Enbinned, fbinned=CNOfunc(En,fn,Eo,fo,Ef,ff,n_bins)
 
 #write the combined spectrum to a file in the required format for ratpac
 with open(dirname + "/../data/CNO.ratdb",'w') as outfile:
     outfile.write("{\n")
-    outfile.write('name: "CNO"\n')
+    outfile.write('name: "SPECTRUM",\n')
+    outfile.write('index: "CNO",\n')
     outfile.write("valid_begin: [0,0],\n")
     outfile.write("valid_end:[0,0],\n")
-    outfile.write("emin: %.5g\n" % Enbinned[0])
-    outfile.write("emax: %.5g\n" % Enbinned[-1])
+    outfile.write("emin: %f\n" % Enbinned[0])
+    outfile.write("emax: %f\n" % Enbinned[-1])
     outfile.write("spec_e: [")
     for i in range(n_bins-1):
-        if i != (n_bins-2): outfile.write("%.5g," % Enbinned[i])
-        else: outfile.write("%.5g],\n" % Enbinned[i])
-    outfile.write("spec_flux: [")
+        if i != (n_bins-2): outfile.write("%f," % Enbinned[i])
+        else: outfile.write("%f],\n" % Enbinned[i])
+    outfile.write("spec_mag: [")
     for i in range(n_bins-1):
-        if i != (n_bins-2): outfile.write("%.5g," % fbinned[i])
-        else: outfile.write("%.5g],\n" % fbinned[i])
+        if i != (n_bins-2): outfile.write("%f," % fbinned[i])
+        else: outfile.write("%f],\n" % fbinned[i])
     outfile.write("}")
 
