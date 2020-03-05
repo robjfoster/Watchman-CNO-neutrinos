@@ -1,4 +1,5 @@
 # watchman-CNO-neutrinos
+
 Analysis of watchman sensitivity to CNO solar neutrinos
 
 compare_and_plot_spectra.py: Compare the data for solar neutrino spectra for both the raw data and the rat-pac formatted data by plotting both. All data is found in the data file, the rat-pac formatted data has been copied into the script rather than read in.

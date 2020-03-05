@@ -37,7 +37,7 @@ with open(dirname + "/../data/pp.ratdb",'w') as outfile:
     outfile.write('name: "SPECTRUM",\n')
     outfile.write('index: "pp",\n')
     outfile.write("valid_begin: [0,0],\n")
-    outfile.write("valid_Eppd:[0,0],\n")
+    outfile.write("valid_End:[0,0],\n")
     outfile.write("emin: %f\n" % Epp[0])
     outfile.write("emax: %f\n" % Epp[-1])
     outfile.write("spec_e: [")

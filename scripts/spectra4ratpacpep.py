@@ -11,10 +11,13 @@ fi_pep = 7.98e8
 
 Epep = 1.44 # Solar Neutrinos Spectroscopy 1704.06331
 
-EPEP=[Epep]*240
+#EPEP=[Epep]*240
 fPEP=np.linspace(0,fi_pep,240) #Create 240 points for hep spectrum between min and max flux at fixed energy
 
+EPEP=np.linspace(Epep-0.5*(240/10000000),Epep+0.5*(240/10000000),240)
+
 n_bins = len(EPEP)
+print(EPEP)
 
 #write the combined spectrum to a file in the required format for ratpac
 with open(dirname + "/../data/pep.ratdb",'w') as outfile:
