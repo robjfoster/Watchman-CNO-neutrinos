@@ -12,4 +12,4 @@ spectra4ratpacX.py: Converts the raw data for component X to a format that can b
 
 CNOsolarNeutrinoBins.py: Compares how the number of bins used in creating CNO spectrum from its components effected the flux. This was used to solve an issue in normalising the spectrum.
 
-activities.py, rates.py, significance.py, masses.py all taken from a summer studemt's code. These contain funtionality from watchmakers.
+activities.py, rates.py, significance.py, masses.py all taken from a summer student's code. These contain funtionality from watchmakers.
