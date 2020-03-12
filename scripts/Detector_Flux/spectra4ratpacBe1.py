@@ -25,6 +25,12 @@ Aeff = (np.cos(theta) * hfid * 2 * Rfid) + (np.sin(theta) * np.pi * Rfid**2) #Ef
 
 fbe1 = Aeff * be1[:, 1]*fi_be1 #Flux in detector s^-1 MeV^-1
 
+FreeProtons = 0.668559 # 0.668559 * 10^32 Free protons per kton of water
+nktons = 2 * np.pi * (hfid/100) * (Rfid/100)**2 /1000 # Number of ktons of water in detector. 1000 m^3 in 1 kton
+TNU = FreeProtons * nktons #Using s^-1 not year^-1 as this is what watchmakers uses.
+
+Fbe1 = fbe1 * TNU * Ebe1 #Flux in terms of TNU (using s^-1)
+
 n_bins = len(Ebe1)
 
 #write the combined spectrum to a file in the required format for ratpac
@@ -42,7 +48,7 @@ with open(dirname + "/../../data/Detector_Flux/be1.ratdb",'w') as outfile:
         else: outfile.write("%f],\n" % Ebe1[i])
     outfile.write("spec_mag: [")
     for i in range(n_bins-1):
-        if i != (n_bins-2): outfile.write("%f," % fbe1[i])
-        else: outfile.write("%f],\n" % fbe1[i])
+        if i != (n_bins-2): outfile.write("%f," % Fbe1[i])
+        else: outfile.write("%f],\n" % Fbe1[i])
     outfile.write("}")
 

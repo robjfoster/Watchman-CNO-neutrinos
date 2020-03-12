@@ -109,6 +109,12 @@ Enbinned, fbinned=CNOfunc(En,fn,Eo,fo,Ef,ff,n_bins)
 
 fbinned = Aeff * fbinned # Flux in s^-1 MeV^-1 in detector volume
 
+FreeProtons = 0.668559 # 0.668559 * 10^32 Free protons per kton of water
+nktons = 2 * np.pi * (hfid/100) * (Rfid/100)**2 /1000 # Number of ktons of water in detector. 1000 m^3 in 1 kton
+TNU = FreeProtons * nktons #Using s^-1 not year^-1 as this is what watchmakers uses.
+
+Fbinned = fbinned * TNU * Enbinned #Flux in terms of TNU (using s^-1)
+
 #write the combined spectrum to a file in the required format for ratpac
 with open(dirname + "/../../data/Detector_Flux/CNO.ratdb",'w') as outfile:
     outfile.write("{\n")
@@ -124,7 +130,7 @@ with open(dirname + "/../../data/Detector_Flux/CNO.ratdb",'w') as outfile:
         else: outfile.write("%f],\n" % Enbinned[i])
     outfile.write("spec_mag: [")
     for i in range(n_bins-1):
-        if i != (n_bins-2): outfile.write("%f," % fbinned[i])
-        else: outfile.write("%f],\n" % fbinned[i])
+        if i != (n_bins-2): outfile.write("%f," % Fbinned[i])
+        else: outfile.write("%f],\n" % Fbinned[i])
     outfile.write("}")
 

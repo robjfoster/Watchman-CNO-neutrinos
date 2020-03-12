@@ -27,6 +27,12 @@ Aeff = (np.cos(theta) * hfid * 2 * Rfid) + (np.sin(theta) * np.pi * Rfid**2) #Ef
 
 fhep = Aeff * hep[:, 1]*fi_hep #Flux in s^-1 MeV^-1 in detector
 
+FreeProtons = 0.668559 # 0.668559 * 10^32 Free protons per kton of water
+nktons = 2 * np.pi * (hfid/100) * (Rfid/100)**2 /1000 # Number of ktons of water in detector. 1000 m^3 in 1 kton
+TNU = FreeProtons * nktons #Using s^-1 not year^-1 as this is what watchmakers uses.
+
+Fhep = fhep * TNU * Ehep #Flux in terms of TNU (using s^-1)
+
 n_bins = len(Ehep)
 
 with open(dirname + "/../../data/Detector_Flux/hep.ratdb",'w') as outfile:
@@ -43,7 +49,7 @@ with open(dirname + "/../../data/Detector_Flux/hep.ratdb",'w') as outfile:
         else: outfile.write("%f],\n" % Ehep[i])
     outfile.write("spec_mag: [")
     for i in range(n_bins-1):
-        if i != (n_bins-2): outfile.write("%f," % fhep[i])
-        else: outfile.write("%f],\n" % fhep[i])
+        if i != (n_bins-2): outfile.write("%f," % Fhep[i])
+        else: outfile.write("%f],\n" % Fhep[i])
     outfile.write("}")
 
