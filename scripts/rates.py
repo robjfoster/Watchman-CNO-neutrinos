@@ -13,18 +13,21 @@ rate = 0.0
 
 # VOLUME
 FreeProtons = 0.668559
-tankRadius = 9500 - 6.35
-halfHeight = 10000 - 6.35
-vol = np.pi*pow(tankRadius/1000.,2)*(2.*halfHeight/1000.)
+#tankRadius = 9500 - 6.350 #Change
+#halfHeight = 10000 - 6.350 #Change
+#vol = np.pi*pow(tankRadius/1000.,2)*(2.*halfHeight/1000.)
+vol=1316
 print ("Volume of Water",vol,"m^3")
 
 # MASS
 # Input masses of components from masses.py 
-nKiloTons = np.pi*pow(tankRadius/1000.,2)*(2.*halfHeight/1000.)/1000.
-mass_pmt = 4900
+#nKiloTons = np.pi*pow(tankRadius/1000.,2)*(2.*halfHeight/1000.)/1000.
+nKiloTons=vol/1000
+print(nKiloTons)
+mass_pmt = 4900 # 3500 PMTs at 1.4 kg each
 mass_cable = 0.0
 mass_conc = 2.96e6
-mass_gd = 5.66e6 * 0.1
+mass_gd = 5.66e6 * 0.1 #0.1 % Gd by mass
 mass_rock = 7.617e6
 mass_shield = 0.0
 mass_tank = 8.94e4
@@ -366,9 +369,9 @@ for i in range(3):
     rate = rate + (float(water_ibd[i,1])*activityIBD)
 
 #CNO RATE
-cno_rate = eff_CNO*nKiloTons/1000*FreeProtons*3600*24
+cno_rate = 0.18 #eff_CNO#*nKiloTons/1000*FreeProtons*3600*24
 
-daily_rate = rate * 24 * 3600 * 0.05 * 0.0001 # Remove distance and time cuts (0.05 and 0.0001)
+daily_rate = rate * 24 * 3600# * 0.05 * 0.0001 # Remove distance and time cuts (0.05 and 0.0001)
 print("CNO_Rate:", cno_rate, "per day")
 print("Daily Rate:", daily_rate, "per day")
 

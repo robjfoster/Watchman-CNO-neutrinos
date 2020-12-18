@@ -1,0 +1,6 @@
+Signal Rate = 4.913 per day 
+Background Rate = 12715.509 per day 
+Time to 3σ = 4743 days 
+Time to 3σ = 12.995 years 
+Time to 5σ = 13174 days 
+Time to 5σ = 36.093 years 

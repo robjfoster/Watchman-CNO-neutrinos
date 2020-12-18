@@ -1,0 +1,9 @@
+Rate for CNO in 1.32 kTon fiducial volume = 2.911539e-03 per second
+Rate for CNO (low metallicity) in 1.32 kTon fiducial volume = 2.415958e-03 per second
+Rate for CNO (high metallicity) in 1.32 kTon fiducial volume = 3.407120e-03 per second
+Rate for B in 1.32 kTon fiducial volume = 1.591476e-03 per second
+Rate for 7Be_1 in 1.32 kTon fiducial volume = 7.354347e-09 per second
+Rate for 7Be_2 in 1.32 kTon fiducial volume = 4.261939e-08 per second
+Rate for hep in 1.32 kTon fiducial volume = 3.889104e-06 per second
+Rate for pep in 1.32 kTon fiducial volume = 1.381746e-12 per second
+Rate for pp in 1.32 kTon fiducial volume = 2.237690e-02 per second

@@ -88,7 +88,7 @@ def CNOPlot(CNOfunc,En,fn,Eo,fo,Ef,ff,n_bins):
     plt.xlim(0.1, 21)
     plt.ylim(10, 10e12)
     plt.xlabel("Energy [MeV]")
-    plt.ylabel("Flux [cm$^{-2}$ s$^{-1}$ MeV$^{-1}$]")
+    plt.ylabel("Flux [cm$^{-2}$ s$^{-1}$]")
     plt.legend()
     plt.title('CNO Solar Neutrino Spectrum')
     plt.savefig(dirname + "/../plots/CNOSolarNeutrinoSpectrum.pdf")

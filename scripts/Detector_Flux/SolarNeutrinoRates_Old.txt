@@ -1,0 +1,7 @@
+Rate for B in 1.32 kTon fiducial volume = 2.896062e-03 per second
+Rate for 7Be_1 in 1.32 kTon fiducial volume = 1.338295e-08 per second
+Rate for 7be_2 in 1.32 kTon fiducial volume = 7.755593e-08 per second
+Rate for CNO in 1.32 kTon fiducial volume = 4.754119e-03 per second
+Rate for hep in 1.32 kTon fiducial volume = 7.077133e-06 per second
+Rate for pep in 1.32 kTon fiducial volume = 2.514410e-12 per second
+Rate for pp in 1.32 kTon fiducial volume = 4.071999e-02 per second

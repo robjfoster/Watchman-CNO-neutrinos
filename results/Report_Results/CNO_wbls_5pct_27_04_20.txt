@@ -1,0 +1,16 @@
+Signal Rate = 110.000 per day 
+Signal Rate (High Metallicty) = 134.000 per day 
+Signal Rate (Low Metallicity) = 86.000 per day 
+Background Rate = 3034000.000 per day 
+Time to 3σ (Mean Flux) = 2255 days 
+Time to 3σ (Mean Flux) = 6.174 years 
+Time to 3σ (High Metallicity) = 1520 days 
+Time to 3σ (High Metallicity) = 4.162 years 
+Time to 3σ (Low Metallicity) = 3691 days 
+Time to 3σ (Low Metallicity) = 10.105 years 
+Time to 5σ (Mean Flux) = 6268 days 
+Time to 5σ (Mean Flux) = 17.161 years 
+Time to 5σ (High Metallicity) = 4223 days 
+Time to 5σ (High Metallicity) = 11.562 years 
+Time to 5σ (Low Metallicity) = 10255 days 
+Time to 5σ (Low Metallicity) = 28.077 years 

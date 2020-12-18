@@ -1,0 +1,224 @@
+#%matplotlib inline
+##!/usr/bin/python
+
+import matplotlib.pyplot as plt
+import numpy as np
+import math as mt
+import os
+
+dirname = os.path.dirname(os.path.realpath(__file__))
+
+def TimetoDetection(sigrate,backrate,maxdays,plot,save,name):
+
+	"""
+	Calculcate the time to detect CNO solar neutrinos to 3 and 5 \u03C3.
+	Inputs needed: daily signal rate, daily background rate, maximum number of days to look for, plot = Yes or No, save plot = Yes or No, name to save plot as (don't include file type e.g. .pdf)
+	Outputs: Time to 3 and 5 \u03C3, plot of significance of signal (if Yes selected)
+	"""
+
+	dirname = os.path.dirname(os.path.realpath(__file__))
+	
+	mus1 = sigrate
+	mubg = backrate
+	maxdays = maxdays
+	sumsums1 = np.zeros(maxdays)
+	sumsumbg = np.zeros(maxdays)
+	loop = 1000
+	
+	for ntry in range(loop):
+		if ntry % 10 == 0:
+			print("Completion:", int(ntry/loop * 100),"%") #Print completion status of loop
+		s1 = np.random.poisson(mus1,maxdays) #Poisson distribution of signal
+		bg = np.random.poisson(mubg,maxdays) #Poisson distribution of background
+		day = np.arange(0,maxdays,1)
+		sums1 = np.cumsum(s1) #Cumulatively sum the signal
+		sumbg = np.cumsum(bg) #Cumulatively sum the background
+		sumsums1 = sumsums1 + sums1
+		sumsumbg = sumsumbg + sumbg
+    
+	as1 = sumsums1/1000.0
+	abg = sumsumbg/1000.0
+
+	#plt.hist(abg,bins=maxdays,label='background')
+	#plt.hist(as1,bins=maxdays,label='signal')
+	#plt.legend()
+	#plt.show()
+	#plt.hist(abg,label='background')
+	#plt.legend()
+	#plt.show()
+
+	print("Determining signal distribution")
+	r = as1/(np.sqrt(as1+abg))
+
+	print("Finding position of 3\u03C3")
+	horiz_line_data_3 = np.array([3 for i in range(len(day))]) #Horizontal line at 3 sigma
+	print("Finding position of 5\u03C3")
+	horiz_line_data_5 = np.array([5 for i in range(len(day))]) #Horizontal line at 5 sigma
+	
+	day_point = np.arange(0,6,1)
+
+	print("Finding time to 3\u03C3")
+	time_3 = np.argwhere(np.diff(np.sign(r - horiz_line_data_3))).flatten() #Time to 3 sig in days
+	print("Finding time to 5\u03C3")
+	time_5 = np.argwhere(np.diff(np.sign(r - horiz_line_data_5))).flatten() #Time to 5 sig in days
+
+	vert_line_data_3 = np.array([time_3 for i in range(len(day_point))]) #Vertical line from where signal reach 3 sigma
+	vert_line_data_5 = np.array([time_5 for i in range(len(day_point))]) #Vertical line from where signal reach 5 sigma
+	
+	if not time_3 and not time_5: #Significance doesn't reach 3 sigma (or 5 sigma)
+
+		print("The data takes > ", maxdays, "days to reach 3\u03C3")
+
+		if plot == 'Yes' or plot == 'yes' or plot == 'Y' or plot == 'y':
+			print("Plotting data")
+			plt.plot(day,r,'r',label='CNO Signal')
+
+			print("Formatting plot")
+			plt.legend(loc='upper left')
+			plt.xlabel('Days')
+			plt.ylabel('Significance [\u03C3]')
+			plt.ticklabel_format(style='sci',axis='x', scilimits=(0,0))
+			plt.ylim(0,1.3*max(r))
+			plt.title('Time to see CNO Solar Neutrino Signal')
+			
+			if save == 'Yes' or save == 'yes' or save == 'Y' or save == 'y':
+				print('Saving figure as', name,'.pdf')
+				plt.savefig(dirname + '/../results/' + name + '.pdf')
+
+			else:
+				print('Not saving figure')
+				
+			plt.show()
+
+		else:
+			print('Plot not selected')
+
+		if save == 'Yes' or save == 'yes' or save == 'Y' or save == 'y':		
+			print('Saving data as', name,'.txt')
+			with open(dirname + '/../results/' + name + '.txt', 'w+') as outfile:
+				outfile.write("Signal Rate = %.3f per day \n" % sigrate)
+				outfile.write("Background Rate = %.3f per day \n" % backrate)
+				outfile.write("Signal didn't reach 3\u03C3 in %i days" % maxdays)
+
+		else:
+			print('Not saving data')
+		
+	elif not time_5: #Significance doesn't reach 5 sigma
+		
+		if plot == 'Yes' or plot == 'yes' or plot == 'Y' or plot == 'y':
+
+			print("Plotting data")
+			plt.plot(day,r,'r',label='CNO Signal')
+			print("Plotting 3\u03C3")
+			plt.plot(vert_line_data_3, day_point, 'b--',label='3\u03C3 ("Evidence")')
+			plt.plot(day, horiz_line_data_3, 'b--')
+
+			print("Formatting plot")
+			plt.legend(loc='upper left')
+			plt.xlabel('Days')
+			plt.ylabel('Significance [\u03C3]')
+			plt.ticklabel_format(style='sci',axis='x', scilimits=(0,0))
+			plt.ylim(0,1.3*max(r))
+			plt.title('Time to see CNO Solar Neutrino Signal')
+
+			if save == 'Yes' or save == 'yes' or save == 'Y' or save == 'y':
+				
+				print('Saving Figure as', name,'.pdf')
+				plt.savefig(dirname + '/../results/' + name + '.pdf')
+
+			else:
+				
+				print('Not saving figure')
+
+			plt.show()
+
+		else:
+
+			print('Plot not selected')
+
+		if save == 'Yes' or save == 'yes' or save == 'Y' or save == 'y':		
+			print('Saving data as', name,'.txt')
+			with open(dirname + '/../results/' + name + '.txt', 'w+') as outfile:
+				outfile.write("Signal Rate = %.3f per day \n" % sigrate)
+				outfile.write("Background Rate = %.3f per day \n" % backrate)
+				outfile.write("Time to 3\u03C3 = %i days \n" % time_3)
+				outfile.write("Time to 3\u03C3 = %.3f years \n" % (time_3/365))
+				outfile.write("Signal did't reach 5\u03C3 in %i days" % maxdays)
+
+		else:
+			print('Not saving data')
+
+		print ("Time to 3\u03C3:", time_3, "days")
+		print ("Time to 3\u03C3:", time_3/(365),"years")
+		print("The data takes > ", maxdays, "days to reach 5\u03C3")
+	
+
+	elif max(r)>vert_line_data_3.all() and max(r)>vert_line_data_5.all(): #Significance passes 5 sigma
+	
+		if plot == 'Yes' or plot == 'yes' or plot == 'Y' or plot == 'y':
+
+			print("Plotting data")
+			plt.plot(day,r,'r',label='CNO Signal')
+			print("Plotting 3\u03C3")
+			plt.plot(vert_line_data_3, day_point, 'b--',label='3\u03C3 ("Evidence")')
+			plt.plot(day, horiz_line_data_3, 'b--')
+
+			print("Plotting 5\u03C3")
+			plt.plot(vert_line_data_5, day_point, 'g--',label='5\u03C3 ("Discovery")')
+			plt.plot(day, horiz_line_data_5, 'g--') 
+
+			print("Formatting plot")
+			plt.legend(loc='upper left')
+			plt.xlabel('Days')
+			plt.ylabel('Significance [\u03C3]')
+			plt.ticklabel_format(style='sci',axis='x', scilimits=(0,0))
+			plt.ylim(0,1.3*max(r))
+			plt.title('Time to see CNO Solar Neutrino Signal')
+
+			if save == 'Yes' or save == 'yes' or save == 'Y' or save == 'y':
+				
+				print('Saving Figure as', name,'.pdf')
+				plt.savefig(dirname + '/../results/' + name + '.pdf')
+
+			else:
+
+				print('Not saving figure')
+
+			plt.show()
+
+		else:
+			
+			print('Plot not selected')
+
+		if save == 'Yes' or save == 'yes' or save == 'Y' or save == 'y':		
+			print('Saving data as', name,'.txt')
+			print(sigrate)
+			with open(dirname + '/../results/' + name + '.txt', 'w+') as outfile:
+				outfile.write("Signal Rate = %.3f per day \n" % sigrate)
+				outfile.write("Background Rate = %.3f per day \n" % backrate)
+				outfile.write("Time to 3\u03C3 = %i days \n" % time_3)
+				outfile.write("Time to 3\u03C3 = %.3f years \n" % (time_3/365))
+				outfile.write("Time to 5\u03C3 = %i days \n" % time_5)
+				outfile.write("Time to 5\u03C3 = %.3f years \n" % (time_5/365))
+
+		else:
+			print('Not saving data')
+
+		print ("Time to 3\u03C3:", int(time_3), "days")
+		print ("Time to 3\u03C3:", float(time_3)/(365),"years")
+		print ("Time to 5\u03C3:", int(time_5), "days")
+		print ("Time to 5\u03C3:", float(time_5)/(365),"years")
+
+	else:
+		print("Something has gone wrong determining time")
+
+	return time_3,time_5
+
+sigrate = float(eval(input('Daily signal rate: ')))
+backrate = float(eval(input('Daily background rate: ')))
+maxdays = int(eval(input('Maximum number of days: ')))
+plot = input('Plot signal? (Yes/No) ' )
+save = input('Save figure? (Yes/No) ' )
+name = input('Figure name (exclude file type, leave blank if not saving figure): ')
+
+time_3,time_5=TimetoDetection(sigrate,backrate,maxdays,plot,save,name)

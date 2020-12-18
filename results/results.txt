@@ -1,0 +1,56 @@
+wbls_1
+
+Signal Rate = 29.042 per day 
+Signal Rate (High Metallicty) = 35.322 per day 
+Signal Rate (Low Metallicity) = 22.761 per day 
+Background Rate = 1756977.890 per day 
+Time to 3σ (Mean Flux) = 18748 days 
+Time to 3σ (Mean Flux) = 51.364 years 
+Time to 3σ (High Metallicity) = 12675 days 
+Time to 3σ (High Metallicity) = 34.726 years 
+Time to 3σ (Low Metallicity) = 30521 days 
+Time to 3σ (Low Metallicity) = 83.619 years 
+Time to 5σ (Mean Flux) = 52077 days 
+Time to 5σ (Mean Flux) = 142.677 years 
+Time to 5σ (High Metallicity) = 35210 days 
+Time to 5σ (High Metallicity) = 96.466 years 
+Time to 5σ (Low Metallicity) = 84781 days 
+Time to 5σ (Low Metallicity) = 232.277 years 
+
+wbls_3
+
+Signal Rate = 85.647 per day 
+Signal Rate (High Metallicty) = 104.168 per day 
+Signal Rate (Low Metallicity) = 67.124 per day 
+Background Rate = 2747882.749 per day 
+Time to 3σ (Mean Flux) = 3370 days 
+Time to 3σ (Mean Flux) = 9.233 years 
+Time to 3σ (High Metallicity) = 2278 days 
+Time to 3σ (High Metallicity) = 6.241 years 
+Time to 3σ (Low Metallicity) = 5488 days 
+Time to 3σ (Low Metallicity) = 15.036 years 
+Time to 5σ (Mean Flux) = 9365 days 
+Time to 5σ (Mean Flux) = 25.658 years 
+Time to 5σ (High Metallicity) = 6329 days 
+Time to 5σ (High Metallicity) = 17.340 years 
+Time to 5σ (Low Metallicity) = 15246 days 
+Time to 5σ (Low Metallicity) = 41.770 years 
+
+wbls_5
+
+Signal Rate = 110.270 per day 
+Signal Rate (High Metallicty) = 134.117 per day 
+Signal Rate (Low Metallicity) = 86.423 per day 
+Background Rate = 3034422.170 per day 
+Time to 3σ (Mean Flux) = 2245 days 
+Time to 3σ (Mean Flux) = 6.151 years 
+Time to 3σ (High Metallicity) = 1517 days 
+Time to 3σ (High Metallicity) = 4.156 years 
+Time to 3σ (Low Metallicity) = 3656 days 
+Time to 3σ (Low Metallicity) = 10.016 years 
+Time to 5σ (Mean Flux) = 6238 days 
+Time to 5σ (Mean Flux) = 17.090 years 
+Time to 5σ (High Metallicity) = 4216 days 
+Time to 5σ (High Metallicity) = 11.551 years 
+Time to 5σ (Low Metallicity) = 10157 days 
+Time to 5σ (Low Metallicity) = 27.827 years 

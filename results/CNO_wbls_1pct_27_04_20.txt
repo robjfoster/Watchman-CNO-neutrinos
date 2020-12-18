@@ -1,0 +1,16 @@
+Signal Rate = 29.000 per day 
+Signal Rate (High Metallicty) = 35.000 per day 
+Signal Rate (AGSS09) = 23.000 per day 
+Background Rate = 1757000.000 per day 
+Time to 3σ (Mean Flux) = 18800 days 
+Time to 3σ (Mean Flux) = 51.472 years 
+Time to 3σ (GS98) = 12908 days 
+Time to 3σ (GS98) = 35.340 years 
+Time to 3σ (AGSS09) = 29891 days 
+Time to 3σ (AGSS09) = 81.837 years 
+Time to 5σ (Mean Flux) = 52224 days 
+Time to 5σ (Mean Flux) = 142.982 years 
+Time to 5σ (GS98) = 35856 days 
+Time to 5σ (GS98) = 98.168 years 
+Time to 5σ (AGSS09) = 83036 days 
+Time to 5σ (AGSS09) = 227.340 years 
